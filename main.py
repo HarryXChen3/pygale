@@ -61,7 +61,7 @@ while True:
         if event.type == pygame.QUIT:
             exit()
 
-    #cube.rotation += Vector3(1, 1, 1)
+    cube.rotation += Vector3(1, 1, 1)
 
     for p0, p1, p2 in cube.faces:
 
