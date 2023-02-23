@@ -1,11 +1,16 @@
 import pygame
-from pygame import Vector3
+from pygame import Vector3, Vector2
 from WorldObject import WorldObject
+from Camera import Camera
+
 
 screenSize = (1280, 720)
 
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode(screenSize)
+
+camera = Camera(Vector2(screenSize))
+camera.position = Vector3()
 
 cube = WorldObject([
     Vector3(-100, -100, -100), #bottom left
@@ -42,7 +47,7 @@ cube = WorldObject([
     [3, 6, 7],
     [0, 2, 4],
     [2, 4, 6]
-])
+], camera)
 
 cube.position = Vector3(screenSize[0] // 2, screenSize[1] // 2, 0)
 
@@ -56,12 +61,9 @@ while True:
         if event.type == pygame.QUIT:
             exit()
 
-    cube.rotation += Vector3(0, 1, 0)
+    #cube.rotation += Vector3(1, 1, 1)
 
-    for p0x, p1x, p2x in cube.faces:
-        p0 = list(p0x.flat) #type: ignore
-        p1 = list(p1x.flat) #type: ignore
-        p2 = list(p2x.flat) #type: ignore
+    for p0, p1, p2 in cube.faces:
 
         pygame.draw.polygon(screen, (0, 255, 0), [
             (p0[0], p0[1]),
@@ -69,14 +71,11 @@ while True:
             (p2[0], p2[1])
         ])
 
-    for p0x, p1x in cube.edges:
-        p0 = list(p0x.flat) #type: ignore
-        p1 = list(p1x.flat) #type: ignore
+    for p0, p1 in cube.edges:
 
         pygame.draw.aaline(screen, (255, 0, 0), (p0[0], p0[1]), (p1[0], p1[1]))
 
-    for point in cube.vertices:
-        p = list(point.flat) #type: ignore
+    for p in cube.vertices:
         pygame.draw.circle(screen, (0, 255, 255), (p[0], p[1]), 5)
 
     pygame.display.update()
