@@ -1,0 +1,6 @@
+https://en.wikipedia.org/wiki/3D_projection
+https://en.wikipedia.org/wiki/Z-buffering
+
+
+help:
+https://github.com/HarryXChen3/pygale

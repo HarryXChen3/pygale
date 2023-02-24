@@ -16,7 +16,7 @@ class Camera:
 
     def project_perspective(self, point: Vector3):
 
-        rx, ry, rz = self.rotation.x, self.rotation.y, self.rotation.z;
+        rx, ry, rz = radians(self.rotation.x), radians(self.rotation.y), radians(self.rotation.z)
 
         e = Vector3(0, 0, 1) - self.position
 
@@ -60,6 +60,6 @@ class Camera:
 
         b = Vector2(f[0] / f[2], f[1] / f[2])
 
-        print(point, f, b)
+        #print(point, f, b)
 
         return b
